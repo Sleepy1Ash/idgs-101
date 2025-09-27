@@ -1,0 +1,36 @@
+<!-- DATA INPUT -->
+      <div class="sm:col-span-3">
+        <label for="task-name" class="block text-sm/6 font-medium text-gray-900">Task</label>
+        <div class="mt-2">
+          <input
+            #txtfield
+            (input)="text_field.set(txtfield.value)"
+            [value]="text_field()"
+            id="task-name"
+            type="text"
+            name="task-name"
+            autocomplete="given-task.name"
+            class="block w-full rounded-md bg-white px-4 py-4 text-base text-gray-900
+                   outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2
+                   focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+          />
+        </div>
+
+        <div class="mt-2">
+          <p class="text-sm text-red-600">{{ messageError() }}</p>
+        </div>
+
+        <div class="mt-6 flex items-center justify-end gap-x-6">
+          <button (click)="resetTask()" type="button" class="text-sm/6 font-semibold text-gray-900">Cancel</button>
+          <button type="button"
+                (click)="addTask()"
+                [disabled]="!text_field().trim()"
+                class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs 
+                    hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600
+                    disabled:opacity-50 disabled:cursor-not-allowed">
+            Save
+        </button>
+
+        </div>
+      </div>
+      <!-- END DATA INPUT -->

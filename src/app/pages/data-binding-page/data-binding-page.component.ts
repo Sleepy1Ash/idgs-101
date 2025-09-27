@@ -1,16 +1,14 @@
 import { Component, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { ITask } from '../../core/interfaces';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-data-binding-page',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [],
   templateUrl: './data-binding-page.component.html',
 })
 export class DataBindingPageComponent {
-  title = 'Data Binding';
+  title = 'Data Binding Page';
 
   // Signals
   text_field = signal('');
@@ -18,7 +16,7 @@ export class DataBindingPageComponent {
   tasks = signal<ITask[]>([]);
 
   // Limpia solo el input y el mensaje de error
-  resetInput() {
+  resetTask() {
     this.text_field.set('');
     this.messageError.set('');
   }
@@ -44,6 +42,6 @@ export class DataBindingPageComponent {
     this.tasks.update(tasks => [...tasks, newTask]);
 
     // Solo limpia el input y mensaje de error
-    this.resetInput();
+    this.resetTask();
   }
 }

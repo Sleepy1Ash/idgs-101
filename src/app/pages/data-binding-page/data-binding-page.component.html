@@ -11,8 +11,9 @@
         <label for="task-name" class="block text-sm/6 font-medium text-gray-900">Task</label>
         <div class="mt-2">
           <input
-            [ngModel]="text_field()"
-            (ngModelChange)="text_field.set($event)"
+            #txtfield
+            (input)="text_field.set(txtfield.value)"
+            [value]="text_field()"
             id="task-name"
             type="text"
             name="task-name"
@@ -24,11 +25,11 @@
         </div>
 
         <div class="mt-2">
-          <p class="text-sm text-red-600" *ngIf="messageError()">{{ messageError() }}</p>
+          <p class="text-sm text-red-600">{{ messageError() }}</p>
         </div>
 
         <div class="mt-6 flex items-center justify-end gap-x-6">
-          <button (click)="resetInput()" type="button" class="text-sm/6 font-semibold text-gray-900">Cancel</button>
+          <button (click)="resetTask()" type="button" class="text-sm/6 font-semibold text-gray-900">Cancel</button>
           <button type="button"
                 (click)="addTask()"
                 [disabled]="!text_field().trim()"
@@ -46,10 +47,12 @@
       <div class="sm:col-span-3">
         <label class="block text-sm/6 font-medium text-gray-900">All my tasks</label>
         <div class="mt-5">
-          <p class="text-sm text-gray-500" *ngIf="tasks().length === 0">No task yet</p>
-
-          <ul class="space-y-2" *ngIf="tasks().length > 0">
-            <li *ngFor="let task of tasks(); let i = index" class="px-3 py-1.5 rounded-lg shadow-md flex justify-between items-center
+          @if(tasks().length === 0){
+          <p class="text-sm text-gray-900">No task yet</p>
+          }@else{
+          <ul class="space-y-2">
+            @for(task of tasks(); track task.id) {
+            <li class="px-3 py-1.5 rounded-lg shadow-md flex justify-between items-center
               bg-white hover:bg-gray-100 transition">
               <span class="text-gray-800">{{ task.name }}</span>
               <button type="button" 
@@ -62,11 +65,11 @@
                 </svg>
               </button>
             </li>
+          }
           </ul>
+        }
         </div>
       </div>
-      <!-- END TASK LIST -->
-
     </div>
   </div>
 </div>
