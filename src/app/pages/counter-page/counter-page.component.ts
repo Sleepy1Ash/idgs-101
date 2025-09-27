@@ -9,10 +9,10 @@ import { Component, effect, signal } from '@angular/core';
 export class CounterPageComponent {
   counter = signal(10);
   increaseBy(value: number = 1) {
-    this.counter.update((current) => current + value);
+    this.counter.update((counter) => counter + value);
   }
   decreaseBy(value: number = 1) {
-    this.counter.update((current) => current - value);
+    this.counter.update((counter) => counter - value);
   }
   constructor(){
     const saved = localStorage.getItem('counter');
